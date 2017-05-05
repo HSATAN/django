@@ -103,9 +103,12 @@ def new_topic(request):
             #return HttpResponse("数据有错误")
     pass
 def index(request):
-    return render(request, 'machinelearning/index.html')
+    ip = request.META['REMOTE_ADDR']
+    content={'ip':ip}
+    return render(request, 'machinelearning/index.html',content)
 #@login_required
 def service(request):
+
     return render(request,'machinelearning/service.html')
     pass
 def login(request):
