@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/handleCommand/" method="post">
+    {% csrf_token %}
+    <label>请输入要执行的命令：</label><input type="text" maxlength="50" name="command"> <input type="submit" value="提交">
+{{ command }}
+</form>
+</body>
+</html>

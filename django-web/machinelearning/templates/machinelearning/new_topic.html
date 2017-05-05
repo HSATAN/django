@@ -1,0 +1,17 @@
+{% extends 'machinelearning/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加主题</title>
+</head>
+<body>
+{% block content %}
+    <form action="/new_topic/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">add topic</button>
+    </form>
+{% endblock %}
+</body>
+</html>

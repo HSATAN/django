@@ -1,0 +1,22 @@
+{% extends 'machinelearning/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主题</title>
+</head>
+<body>
+{% block content %}
+
+<p>Topics:</p>
+<ul>
+    {% for topic in topics %}
+        <li><a href="/topics/{{ topic.id }}/">{{ topic }}</a></li>
+        {% empty %}
+            <li>你还没有添加任何主题</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+</body>
+</html>
