@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import os
+from machinelearning.mongodb import db
 from machinelearning.models import TOPIC
 from machinelearning.forms import MODELORM,FILEFORM
 import subprocess
@@ -105,6 +106,11 @@ def new_topic(request):
 def index(request):
     ip = request.META['REMOTE_ADDR']
     content={'ip':ip}
+    mongoclient=db.Mongo.get_mongo()
+    mongo_db=mongoclient.visitor
+    table=mongo_db.userip
+    table.save({'_id':ip})
+    mongoclient.close()
     return render(request, 'machinelearning/index.html',content)
 #@login_required
 def service(request):
