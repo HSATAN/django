@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import random
 def bucket(filename,bucketName,separator,classColumn):
     data={}

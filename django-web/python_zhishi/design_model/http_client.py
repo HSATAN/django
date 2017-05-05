@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import requests
 code=requests.get("https://www.fendi.com/it").status_code
 print(code)

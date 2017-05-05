@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 class SingleTon(object):
     __instance=None
     def __init__(self):
