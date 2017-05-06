@@ -121,6 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL='/accounts/login/'
-MEDIA_ROOT='/home'#设置文件的保存路径
-MEDIA_URL='/upload/'#访问该上传文件的url的前缀
+#MEDIA_ROOT='/home'#设置文件的保存路径
+#MEDIA_URL='/upload/'#访问该上传文件的url的前缀
 #APPEND_SLASH=False

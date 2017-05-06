@@ -17,6 +17,9 @@
     <div align="center"><img src="static/kaijie2.jpg"></div>
 <div align="center"><img src="static/kaijie3.jpg"></div>
 <div align="center"><img src="static/kaijie4.jpg"></div>
+{% for url in pic %}
+        <div align="center"><img src="static/pic/{{ url }}"></div>
+    {% endfor %}
 {% endblock %}
 
 </body>

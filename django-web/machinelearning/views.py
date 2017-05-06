@@ -18,8 +18,11 @@ def uppic(request):
         name=image.name
         if form.is_valid():
             form.save()
-            # return render(request,'machinelearning/index.html')
-            return HttpResponse("上传成功")
+            # return render(request,'machinelearning/index.html')/home/upload/picture
+            form = PictureForm()
+            context = {'form': form}
+            return render(request, 'machinelearning/addpic.html', context=context)
+
 
 
         else:
@@ -123,7 +126,8 @@ def new_topic(request):
     pass
 def index(request):
     ip = request.META['REMOTE_ADDR']
-    content={'ip':ip}
+    dir = os.listdir('machinelearning/static/pic')
+    content = {'ip': ip, 'pic': dir}
     mongoclient=db.Mongo.get_mongo()
     mongo_db=mongoclient.visitor
     table=mongo_db.userip

@@ -18,4 +18,5 @@ class FILEMODEL(models.Model):
     def __str__(self):
         return  self.title
 class ImageModel(models.Model):
-    image=models.ImageField(upload_to='upload/picture')
+    image=models.ImageField(upload_to='machinelearning/static/pic')
+
