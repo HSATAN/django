@@ -17,9 +17,10 @@ def uppic(request):
         image = request.FILES.get('image')
         name=image.name
         cishi=name.count('.')
-        if cishi>1:
-            image.name=name.replace('.','',1)
+
         if form.is_valid():
+            if cishi > 1:
+                form.cleaned_data['image'].name=name.replace('.', '', 1)
             form.save()
             # return render(request,'machinelearning/index.html')/home/upload/picture
             form = PictureForm()
