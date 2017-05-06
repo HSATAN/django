@@ -16,6 +16,7 @@ def uppic(request):
         form = PictureForm(request.POST, request.FILES)
         image = request.FILES.get('image')
         name=image.name
+        name=name.replace('.','')
         if form.is_valid():
             form.save()
             # return render(request,'machinelearning/index.html')/home/upload/picture
