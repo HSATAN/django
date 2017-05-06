@@ -20,6 +20,38 @@
 {% for url in pic %}
         <div align="center"><img src="static/pic/{{ url }}"></div>
     {% endfor %}
+    <style>
+body{
+height:2000px;
+}
+.rTop{
+width:100px; height:25px;
+text-align:center; font-size:small;
+line-height:25px; border:1px solid #999;
+position:fixed; right:0; bottom:0;
+border-bottom-color:#333;
+border-right-color:#333; margin:5px;
+cursor:pointer; display:none
+}
+</style>
+<script>
+<!--拖动滚动条或滚动鼠标轮-->
+window.onscroll=function(){
+if(document.body.scrollTop||document.documentElement.scrollTop>0){
+document.getElementById('rTop').style.display="block"
+}else{
+document.getElementById('rTop').style.display="none"
+}
+}
+<!--点击“回到顶部”按钮-->
+function toTop(){
+window.scrollTo('0','0');
+document.getElementById('rTop').style.display="none"
+}
+</script>
+</head>
+<body>
+<div class="rTop" id="rTop" onClick="toTop()">返回顶部</div>
 {% endblock %}
 
 </body>
