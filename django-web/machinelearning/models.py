@@ -17,3 +17,5 @@ class FILEMODEL(models.Model):
     # upload保存文件的存储目录，和setting文件中的MEDIA_ROOT设置的目录组合在一起生成文件的保存路径
     def __str__(self):
         return  self.title
+class ImageModel(models.Model):
+    image=models.ImageField(upload_to='upload/picture')

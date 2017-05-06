@@ -5,12 +5,30 @@ from django.contrib.auth.decorators import login_required
 import os
 from machinelearning.mongodb import db
 from machinelearning.models import TOPIC
-from machinelearning.forms import MODELORM,FILEFORM
+from machinelearning.forms import MODELORM,FILEFORM,PictureForm
 import subprocess
 import  socket
 import logging
 import json
 # Create your views here.
+def uppic(request):
+    if request.method == 'POST':
+        form = PictureForm(request.POST, request.FILES)
+        image = request.FILES.get('image')
+        name=image.name
+        if form.is_valid():
+            form.save()
+            # return render(request,'machinelearning/index.html')
+            return HttpResponse("上传成功")
+
+
+        else:
+            return HttpResponse('上传失败')
+
+    else:
+        form = PictureForm()
+        context = {'form': form}
+        return render(request, 'machinelearning/addpic.html', context=context)
 def upload(request):
     '''
     文件上传方式1，用django的modelform生成表单，用django的框架处理保存上传的文件

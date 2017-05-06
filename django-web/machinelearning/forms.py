@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from  django import forms
-from .models import TOPIC,FILEMODEL
+from .models import TOPIC,FILEMODEL,ImageModel
 
 class MODELORM(forms.ModelForm):
     class Meta:
@@ -13,3 +13,7 @@ class FILEFORM(forms.ModelForm):
     class Meta:
         model=FILEMODEL
         fields=['title','file']
+class PictureForm(forms.ModelForm):
+    class Meta:
+        model=ImageModel
+        fields=['image']
