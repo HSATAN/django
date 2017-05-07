@@ -10,20 +10,21 @@
 $(document).ready(function(){
   $("div").click(function(){
       var name=$(this).children()[0].src.split('/')
-      alert($(this).children()[0].src)
-      alert(name[name.length-1])
-    $("div.mydiv").hide();
-      var xmlhttp=new XMLHttpRequest();
+       if(confirm("确定删除吗")){
+                var xmlhttp=new XMLHttpRequest();
 xmlhttp.open("POST","/handleCommand/",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("command=rm machinelearning/static/pic/"+name[name.length-1]);
-  });
-});
-$(document).ready(function(){
+          $(document).ready(function(){
   $("div").click(function(){
     $(this).hide();
   });
 });
+       }
+
+  });
+});
+
 
 </script>
 </head>
@@ -31,8 +32,6 @@ $(document).ready(function(){
 <div align="right">your ip {{ip}}</div>
     <div align="center">i love xiong</div>
     <a href="/uppic/">添加图片</a>
-    <div align="center" class="pic"><img src="static/doudou1.jpg"></div>
-    <div align="center"  class="pic"><img src="static/doudou2.jpg"></div>
 {% for url in pic %}
         <div align="center"><img src="static/pic/{{ url }}"></div>
     {% endfor %}
