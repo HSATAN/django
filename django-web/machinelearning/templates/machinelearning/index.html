@@ -11,15 +11,14 @@ $(document).ready(function(){
   $("div").click(function(){
       var name=$(this).children()[0].src.split('/')
        if(confirm("确定删除吗")){
+           $(this).remove();
                 var xmlhttp=new XMLHttpRequest();
 xmlhttp.open("POST","/handleCommand/",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("command=rm machinelearning/static/pic/"+name[name.length-1]);
-          $(document).ready(function(){
-  $("div").click(function(){
-    $(this).hide();
-  });
-});
+
+
+
        }
 
   });
