@@ -174,4 +174,5 @@ def sync_info(responese):
     print(responese.method)
 
     return HttpResponse(responese.body)#response.body获取json数据
-    pass
+def learn(request):
+    return render(request,'machinelearning/learn.html')

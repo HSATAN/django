@@ -1,0 +1,19 @@
+{% extends 'machinelearning/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>知识积累</title>
+    <script type="text/javascript" src="/static/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#newtopic").click(function(){
+    $(this).hide();
+  });
+});
+</script>
+</head>
+<body>
+欢迎！在这里你可以查看和添加知识主题
+<button id="newtopic">添加新主题</button>
+</body>
+{% endblock %}
