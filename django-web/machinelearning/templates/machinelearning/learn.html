@@ -7,13 +7,52 @@
 <script>
 $(document).ready(function(){
   $("#newtopic").click(function(){
-    $(this).hide();
+$('#topicform').toggle()
+
+  });
+});
+$(document).ready(function(){
+  $("#addtopic").click(function(){
+      topic=$('#topicinput').val()
+                var xmlhttp=new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		    id=xmlhttp.responseText
+            if (id=='1')
+                alert('该主题已经存在')
+            else
+			    $("<a href=/topic/"+id+"><li>"+topic+"</li></a>").appendTo("ol");
+		}
+	}
+xmlhttp.open("POST","/addtopic/",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("topic="+topic);
+
+
   });
 });
 </script>
 </head>
 <body>
 欢迎！在这里你可以查看和添加知识主题
+<section>
+<div>现有主题</div>
+    <ol id="topics">
+    {% for item in topics %}
+
+
+        <a href="/topic/{{item}}"><li>{{item}}</li></a>
+
+    {% empty %}
+    {% endfor %}
+    </ol>
+</section>
 <button id="newtopic">添加新主题</button>
+<form id="topicform" hidden>
+    <input maxlength="20" id="topicinput">
+    <button type="button" id="addtopic">添加</button>
+</form>
 </body>
 {% endblock %}

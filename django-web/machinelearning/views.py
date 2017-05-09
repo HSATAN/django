@@ -175,4 +175,25 @@ def sync_info(responese):
 
     return HttpResponse(responese.body)#response.body获取json数据
 def learn(request):
-    return render(request,'machinelearning/learn.html')
+    mongoclient = db.Mongo.get_mongo()
+    mongo_db = mongoclient.topics
+    table = mongo_db.mytopic
+    oldtopic = table.find()
+    topics = []
+    for item in oldtopic:
+        topics.append(item['topicname'])
+    mongoclient.close()
+    return render(request,'machinelearning/learn.html',context={'topics':topics})
+def addTopic(request):
+    topic = request.POST.get('topic').strip()
+
+    mongoclient = db.Mongo.get_mongo()
+    mongo_db = mongoclient.topics
+    table = mongo_db.mytopic
+    result=table.update({"topicname":topic},{"$set":{"topicname":topic}},True)
+    mongoclient.close()
+    if result['updatedExisting']==True:
+        print(result['updatedExisting'])
+        return HttpResponse(1)
+    else:
+        return HttpResponse(topic)
