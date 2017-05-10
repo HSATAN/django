@@ -1,0 +1,59 @@
+{% extends 'machinelearning/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>知识积累</title>
+    <script type="text/javascript" src="/static/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#newtopic").click(function(){
+$('#topicform').toggle()
+
+  });
+});
+$(document).ready(function(){
+    $('title').html(window.location.pathname.split('/')[window.location.pathname.split('/').length-1])
+  $("#additem").click(function(){
+      url=window.location.pathname
+      topic=$('#item').val();
+      var xmlhttp=new XMLHttpRequest();
+      xmlhttp.onreadystatechange=function()
+	    {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		    {
+		    id=xmlhttp.responseText
+            if (id=='1')
+                alert('该条目已经存在')
+            else
+            {
+			    $("<li>"+topic+"</li>").appendTo("ol");
+			    $('#topicform').toggle();
+			    $('#item').val('');
+		    }
+		    }
+	    }
+xmlhttp.open("POST",url,true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("item="+topic);
+  });
+});
+</script>
+</head>
+<body>
+欢迎！在这里你可以查看和添加知识主题
+<section>
+<div>现有主题</div>
+    <ol id="topics">
+    {% for item in items %}
+        <li>{{item}}</li>
+    {% empty %}
+    {% endfor %}
+    </ol>
+</section>
+<button id="newtopic">添加新内容</button>
+<form id="topicform" hidden>
+    <textarea id="item" cols="100" rows="20"></textarea>
+    <button type="button" id="additem">添加</button>
+</form>
+</body>
+{% endblock %}

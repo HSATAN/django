@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import os
+from urllib.parse import unquote
 from machinelearning.mongodb import db
 from machinelearning.models import TOPIC
 from machinelearning.forms import MODELORM,FILEFORM,PictureForm
@@ -172,7 +173,6 @@ def sync_info(responese):
     #print(responese.POST['test'])
     print("kai")
     print(responese.method)
-
     return HttpResponse(responese.body)#response.body获取json数据
 def learn(request):
     mongoclient = db.Mongo.get_mongo()
@@ -186,14 +186,44 @@ def learn(request):
     return render(request,'machinelearning/learn.html',context={'topics':topics})
 def addTopic(request):
     topic = request.POST.get('topic').strip()
-
     mongoclient = db.Mongo.get_mongo()
     mongo_db = mongoclient.topics
     table = mongo_db.mytopic
     result=table.update({"topicname":topic},{"$set":{"topicname":topic}},True)
     mongoclient.close()
     if result['updatedExisting']==True:
-        print(result['updatedExisting'])
         return HttpResponse(1)
     else:
         return HttpResponse(topic)
+def showTopic(request):
+    url = request.get_full_path()
+    url=unquote(url)#把url转换成中文
+    print(url)
+    topoc_keys = url.split('/')
+    topic = topoc_keys[len(topoc_keys) - 1]
+    mongoclient = db.Mongo.get_mongo()
+    mongo_db = mongoclient.topics
+    table = mongo_db.mytopic
+    items = table.find_one({'topicname':topic})
+    topics =''
+    if request.method=="POST":
+        detail=request.POST.get('item')
+        topic=topoc_keys[len(topoc_keys)-1]
+        print(topic)
+        olddetail = table.find_one({'topicname':topic})
+        try:
+            details = olddetail['content']
+            details.append(detail)
+            table.update({'topicname': topic}, {"$set": {'content': details}})
+        except:
+            olddetail['content']=[detail]
+            table.save(olddetail)
+        mongoclient.close()
+        return HttpResponse(0)
+    else:
+        try:
+            topics=items['content']
+        except:pass
+        print(topics)
+        mongoclient.close()
+        return render(request,'machinelearning/topicdetail.html',context={'items':topics})
