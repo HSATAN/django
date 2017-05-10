@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import os
-from urllib.parse import unquote
+from urllib import unquote
 from machinelearning.mongodb import db
 from machinelearning.models import TOPIC
 from machinelearning.forms import MODELORM,FILEFORM,PictureForm
