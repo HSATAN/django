@@ -130,6 +130,14 @@ def new_topic(request):
             #return HttpResponse("数据有错误")
     pass
 def index(request):
+    print(request.body)
+    message='''<xml>
+<ToUserName><![CDATA[{0}]]></ToUserName>
+<FromUserName><![CDATA[{1}]]></FromUserName>
+<CreateTime>12345678</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[{2}]]></Content>
+</xml>'''.format()
     return HttpResponse('test')
     try:
         weixin=request.GET.get('echostr')
