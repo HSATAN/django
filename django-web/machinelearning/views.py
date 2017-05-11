@@ -131,7 +131,7 @@ def new_topic(request):
     pass
 def index(request):
     ip = request.META['REMOTE_ADDR']
-    dir = os.listdir('machinelearning/static/pic')
+    dir = os.listdir('machinelearning/static/pic')#获得当前目录下的文件列表，返回的是list
     content = {'ip': ip, 'pic': dir}
     mongoclient=db.Mongo.get_mongo()
     mongo_db=mongoclient.visitor
@@ -196,35 +196,39 @@ def addTopic(request):
     else:
         return HttpResponse(topic)
 def showTopic(request):
-    url = request.get_full_path()
-    print(url)
-    url=unquote(str(url)).decode('utf8')#把url转换成中文
-    print(url)
-    topoc_keys = url.split('/')
-    topic = topoc_keys[len(topoc_keys) - 1]
-    mongoclient = db.Mongo.get_mongo()
-    mongo_db = mongoclient.topics
-    table = mongo_db.mytopic
-    items = table.find_one({'topicname':topic})
-    topics =''
-    if request.method=="POST":
-        detail=request.POST.get('item')
-        topic=topoc_keys[len(topoc_keys)-1]
-        print(topic)
-        olddetail = table.find_one({'topicname':topic})
-        try:
-            details = olddetail['content']
-            details.append(detail)
-            table.update({'topicname': topic}, {"$set": {'content': details}})
-        except:
-            olddetail['content']=[detail]
-            table.save(olddetail)
-        mongoclient.close()
-        return HttpResponse(0)
-    else:
-        try:
-            topics=items['content']
-        except:pass
-        print(topics)
-        mongoclient.close()
-        return render(request,'machinelearning/topicdetail.html',context={'items':topics})
+    try:
+        weixin=request.GET.get('echostr')
+        return HttpResponse(weixin)
+    except:
+        url = request.get_full_path()
+        print(url)
+        url=unquote(str(url)).decode('utf8')#把url转换成中文
+        print(url)
+        topoc_keys = url.split('/')
+        topic = topoc_keys[len(topoc_keys) - 1]
+        mongoclient = db.Mongo.get_mongo()
+        mongo_db = mongoclient.topics
+        table = mongo_db.mytopic
+        items = table.find_one({'topicname':topic})
+        topics =''
+        if request.method=="POST":
+            detail=request.POST.get('item')
+            topic=topoc_keys[len(topoc_keys)-1]
+            print(topic)
+            olddetail = table.find_one({'topicname':topic})
+            try:
+                details = olddetail['content']
+                details.append(detail)
+                table.update({'topicname': topic}, {"$set": {'content': details}})
+            except:
+                olddetail['content']=[detail]
+                table.save(olddetail)
+            mongoclient.close()
+            return HttpResponse(0)
+        else:
+            try:
+                topics=items['content']
+            except:pass
+            print(topics)
+            mongoclient.close()
+            return render(request,'machinelearning/topicdetail.html',context={'items':topics})
