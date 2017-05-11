@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import os
+from lxml import etree
 from urllib import unquote
 from machinelearning.mongodb import db
 from machinelearning.models import TOPIC
@@ -130,16 +131,22 @@ def new_topic(request):
             #return HttpResponse("数据有错误")
     pass
 def index(request):
-    print(request.body)
+    receiveData=request.body.decode('utf8')
+    data = etree.fromstring(receiveData)
+    ToUserName = data.find('ToUserName').text
+    FromUserName = data.find('FromUserName').text
+    CreateTime = data.find('CreateTime').text
+    Content = data.find('Content').text
+    print(receiveData)
 
     message='''<xml>
-<ToUserName><![CDATA[{0}]]></ToUserName>
-<FromUserName><![CDATA[{1}]]></FromUserName>
-<CreateTime>12345678</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[{2}]]></Content>
-</xml>'''
-    return HttpResponse('test')
+    <ToUserName><![CDATA[{0}]]></ToUserName>
+    <FromUserName><![CDATA[{1}]]></FromUserName>
+    <CreateTime>{2}</CreateTime>
+    <MsgType><![CDATA[text]]></MsgType>
+    <Content><![CDATA[{3}]]></Content>
+    </xml>'''.format(FromUserName,ToUserName,CreateTime,Content)
+    return HttpResponse(message)
     try:
         weixin=request.GET.get('echostr')
         return HttpResponse(weixin)
