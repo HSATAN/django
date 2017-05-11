@@ -197,6 +197,7 @@ def addTopic(request):
         return HttpResponse(topic)
 def showTopic(request):
     url = request.get_full_path()
+    print(url)
     url=unquote(url)#把url转换成中文
     print(url)
     topoc_keys = url.split('/')
