@@ -139,7 +139,8 @@ def index(request):
     ToUserName = data.find('ToUserName').text
     FromUserName = data.find('FromUserName').text
     CreateTime = data.find('CreateTime').text
-    Content = data.find('Content').text
+    #Content = data.find('Content').text
+    Content='我爱熊麟茹'
     print(receiveData)
 
     message='''<xml>
