@@ -130,6 +130,7 @@ def new_topic(request):
             #return HttpResponse("数据有错误")
     pass
 def index(request):
+    return HttpResponse('test')
     try:
         weixin=request.GET.get('echostr')
         return HttpResponse(weixin)
