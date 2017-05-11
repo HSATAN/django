@@ -12,6 +12,9 @@ import subprocess
 import  socket
 import logging
 import json
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 # Create your views here.
 def uppic(request):
     if request.method == 'POST':
