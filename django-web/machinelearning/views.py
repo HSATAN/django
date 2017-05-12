@@ -186,6 +186,7 @@ def handleCommand(request):
     command=request.POST.get('command')
     #result=os.system(command)#执行系统命令，不返回执行结果，只返回执行状态数字
     result=os.popen(command)#返回执行结果，调用read函数读取，如result.read()返回的事字符串
+    print(result.read())
     '''这两个都是用当前进程来调用，也就是说它们都是阻塞式的。
     这两种执行系统命令的方式都是在当前进程中，命令执行完毕才会继续往下执行'''
     #sub=subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
