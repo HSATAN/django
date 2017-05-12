@@ -152,6 +152,7 @@ def index(request):
         </xml>'''.format(FromUserName,ToUserName,CreateTime,Content)
         return HttpResponse(message)
     except:
+        return render(request, 'machinelearning/index.html')
         pass
 
 def picture(request):
