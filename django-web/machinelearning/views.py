@@ -170,7 +170,7 @@ def picture(request):
         mongoclient.close()
         return render(request, 'machinelearning/picture.html', content)
     except:
-        return HttpResponse('发生错误')
+        return render(request, 'machinelearning/picture.html')
 #@login_required
 def service(request):
 
