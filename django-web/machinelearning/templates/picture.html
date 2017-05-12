@@ -1,0 +1,36 @@
+
+{% extends "machinelearning/base.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+<script type="text/javascript" src="static/jquery-3.2.1.min.js"></script>
+    <title>机器学习</title>
+        <script>
+/*设置一个长按的计时器，如果点击这个图层超过2秒则触发，mydiv里面的文字从out变in的动作*/
+$(document).ready(function(){
+  $("div").click(function(){
+      var name=$(this).children()[0].src.split('/')
+       if(confirm("确定删除吗")){
+           $(this).remove();
+                var xmlhttp=new XMLHttpRequest();
+xmlhttp.open("POST","/handleCommand/",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("command=rm machinelearning/static/pic/"+name[name.length-1]);
+    }
+
+  });
+});
+
+
+</script>
+</head>
+<body style="font-size: 30px">
+<div align="right">your ip {{ip}}</div>
+    <div align="center">i love xiong</div>
+    <a href="/uppic/">添加图片</a>
+{% for url in pic %}
+        <div align="center"><img src="static/pic/{{ url }}"></div>
+    {% endfor %}
+
+</body>
+{% endblock %}

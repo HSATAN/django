@@ -152,21 +152,24 @@ def index(request):
         </xml>'''.format(FromUserName,ToUserName,CreateTime,Content)
         return HttpResponse(message)
     except:
-        try:
-            #weixin=request.GET.get('echostr')
-            #return HttpResponse(weixin)
+        pass
 
-            ip = request.META['REMOTE_ADDR']
-            dir = os.listdir('machinelearning/static/pic')#获得当前目录下的文件列表，返回的是list
-            content = {'ip': ip, 'pic': dir}
-            mongoclient=db.Mongo.get_mongo()
-            mongo_db=mongoclient.visitor
-            table=mongo_db.userip
-            table.save({'_id':ip})
-            mongoclient.close()
-            return render(request, 'machinelearning/index.html',content)
-        except:
-            return HttpResponse('发生错误')
+def picture(request):
+    try:
+        # weixin=request.GET.get('echostr')
+        # return HttpResponse(weixin)
+
+        ip = request.META['REMOTE_ADDR']
+        dir = os.listdir('machinelearning/static/pic')  # 获得当前目录下的文件列表，返回的是list
+        content = {'ip': ip, 'pic': dir}
+        mongoclient = db.Mongo.get_mongo()
+        mongo_db = mongoclient.visitor
+        table = mongo_db.userip
+        table.save({'_id': ip})
+        mongoclient.close()
+        return render(request, 'machinelearning/picture.html', content)
+    except:
+        return HttpResponse('发生错误')
 #@login_required
 def service(request):
 
