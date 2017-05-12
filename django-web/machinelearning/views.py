@@ -188,7 +188,7 @@ def handleCommand(request):
     result=os.popen(command)#返回执行结果，调用read函数读取，如result.read()返回的事字符串
     '''这两个都是用当前进程来调用，也就是说它们都是阻塞式的。
     这两种执行系统命令的方式都是在当前进程中，命令执行完毕才会继续往下执行'''
-    sub=subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
+    #sub=subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
 
 
     return HttpResponse(socket.gethostbyname(socket.gethostname()))#request.POST获取表单传来的数据字典，用get函数取得名为command的值
