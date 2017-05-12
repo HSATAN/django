@@ -35,5 +35,5 @@ urlpatterns = [
     url(r'^learn/$',learn),
     url(r'^addtopic/$',addTopic),
     url(r'^topic/',showTopic),
-    url(r'^picture$',picture)
+    url(r'^picture/$',picture)
 ]
