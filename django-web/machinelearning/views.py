@@ -134,36 +134,39 @@ def new_topic(request):
             #return HttpResponse("数据有错误")
     pass
 def index(request):
-    receiveData=request.body.decode('utf8')
-    data = etree.fromstring(receiveData)
-    ToUserName = data.find('ToUserName').text
-    FromUserName = data.find('FromUserName').text
-    CreateTime = data.find('CreateTime').text
-    #Content = data.find('Content').text
-    Content='我爱熊麟茹'
-    print(receiveData)
-
-    message='''<xml>
-    <ToUserName><![CDATA[{0}]]></ToUserName>
-    <FromUserName><![CDATA[{1}]]></FromUserName>
-    <CreateTime>{2}</CreateTime>
-    <MsgType><![CDATA[text]]></MsgType>
-    <Content><![CDATA[{3}]]></Content>
-    </xml>'''.format(FromUserName,ToUserName,CreateTime,Content)
-    return HttpResponse(message)
     try:
-        weixin=request.GET.get('echostr')
-        return HttpResponse(weixin)
+        receiveData=request.body.decode('utf8')
+        data = etree.fromstring(receiveData)
+        ToUserName = data.find('ToUserName').text
+        FromUserName = data.find('FromUserName').text
+        CreateTime = data.find('CreateTime').text
+        #Content = data.find('Content').text
+        Content='我爱熊麟茹'
+        #print(receiveData)
+        message='''<xml>
+        <ToUserName><![CDATA[{0}]]></ToUserName>
+        <FromUserName><![CDATA[{1}]]></FromUserName>
+        <CreateTime>{2}</CreateTime>
+        <MsgType><![CDATA[text]]></MsgType>
+        <Content><![CDATA[{3}]]></Content>
+        </xml>'''.format(FromUserName,ToUserName,CreateTime,Content)
+        return HttpResponse(message)
     except:
-        ip = request.META['REMOTE_ADDR']
-        dir = os.listdir('machinelearning/static/pic')#获得当前目录下的文件列表，返回的是list
-        content = {'ip': ip, 'pic': dir}
-        mongoclient=db.Mongo.get_mongo()
-        mongo_db=mongoclient.visitor
-        table=mongo_db.userip
-        table.save({'_id':ip})
-        mongoclient.close()
-        return render(request, 'machinelearning/index.html',content)
+        try:
+            #weixin=request.GET.get('echostr')
+            #return HttpResponse(weixin)
+
+            ip = request.META['REMOTE_ADDR']
+            dir = os.listdir('machinelearning/static/pic')#获得当前目录下的文件列表，返回的是list
+            content = {'ip': ip, 'pic': dir}
+            mongoclient=db.Mongo.get_mongo()
+            mongo_db=mongoclient.visitor
+            table=mongo_db.userip
+            table.save({'_id':ip})
+            mongoclient.close()
+            return render(request, 'machinelearning/index.html',content)
+        except:
+            return HttpResponse('发生错误')
 #@login_required
 def service(request):
 
