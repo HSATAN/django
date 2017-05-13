@@ -154,7 +154,7 @@ def index(request):
     except:
         return render(request, 'machinelearning/index.html')
         pass
-
+@login_required
 def picture(request):
     try:
         # weixin=request.GET.get('echostr')
@@ -171,7 +171,7 @@ def picture(request):
         return render(request, 'machinelearning/picture.html', content)
     except:
         return render(request, 'machinelearning/picture.html')
-#@login_required
+@login_required
 def service(request):
 
     return render(request,'machinelearning/service.html')

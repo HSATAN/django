@@ -1,0 +1,14 @@
++ date +%Y-%m-%d %H:%M:%S
++ echo 2017-03-20 16:40:01, \c
++ [ ! -f kuaidi_db.log.md5 ]
++ md5sum kuaidi_db.log
++ awk {print $1}
++ cat kuaidi_db.log.md5
++ md5_old=50e39c229622553aede2f5cc6d69a29f
++ awk {print $1}
++ cat kuaidi_db.log.md5.new
++ md5_new=a62023e292464d64eddd8674866e4bde
++ mv kuaidi_db.log.md5.new kuaidi_db.log.md5
++ echo 50e39c229622553aede2f5cc6d69a29f, a62023e292464d64eddd8674866e4bde, \c
++ [ 50e39c229622553aede2f5cc6d69a29f = a62023e292464d64eddd8674866e4bde ]
++ echo 
