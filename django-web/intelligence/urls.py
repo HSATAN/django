@@ -19,9 +19,10 @@ from django.contrib import admin
 import django
 from machinelearning.views import index,service,login,command,handleCommand,topics,new_topic,topic,upload,upload1,sync_info
 from machinelearning.views import uppic,learn,addTopic,showTopic,picture
+from django.contrib.auth.views import login as origin_login
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$', django.contrib.auth.views.login),
+    url(r'^accounts/login/$', origin_login),
     url(r'^$',index),
     url(r'^service/',service),
     url(r'^command/',command),
