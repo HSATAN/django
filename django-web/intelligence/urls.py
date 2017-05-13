@@ -21,7 +21,7 @@ from machinelearning.views import index,service,login,command,handleCommand,topi
 from machinelearning.views import uppic,learn,addTopic,showTopic,picture
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/login/$', django.contrib.auth.views.login),
     url(r'^$',index),
     url(r'^service/',service),
     url(r'^command/',command),
