@@ -22,7 +22,7 @@ from machinelearning.views import uppic,learn,addTopic,showTopic,picture
 from django.contrib.auth.views import login as origin_login
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$', origin_login),
+    url(r'^accounts/login/$', admin.site.urls),
     url(r'^$',index),
     url(r'^service/',service),
     url(r'^command/',command),
