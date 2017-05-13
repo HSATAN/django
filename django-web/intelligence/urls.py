@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^$',index),
     url(r'^service/',service),
     url(r'^command/',command),
-    url(r'^accounts/login/',login),
+    #url(r'^accounts/login/',login),
     url(r'^handleCommand/',handleCommand),
     url(r'^topics/$',topics),
     url(r'^new_topic/',new_topic),
