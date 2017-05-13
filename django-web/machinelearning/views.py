@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 import os
 from lxml import etree
 from urllib import unquote
@@ -10,6 +11,7 @@ from machinelearning.models import TOPIC
 from machinelearning.forms import MODELORM,FILEFORM,PictureForm
 import subprocess
 import  socket
+from django.contrib import auth
 import logging
 import json
 import sys
@@ -177,6 +179,7 @@ def service(request):
     return render(request,'machinelearning/service.html')
     pass
 def login(request):
+    return redirect('?next=%s' %(request.get_full_path))
     return  render(request,'machinelearning/login.html')
 
 def handleCommand(request):
