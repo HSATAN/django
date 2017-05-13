@@ -156,7 +156,7 @@ def index(request):
     except:
         return render(request, 'machinelearning/index.html')
         pass
-@login_required
+#@login_required
 def picture(request):
     try:
         # weixin=request.GET.get('echostr')
@@ -179,7 +179,7 @@ def service(request):
     return render(request,'machinelearning/service.html')
     pass
 def login(request):
-    return redirect('?next=%s' %(request.get_full_path))
+    #return redirect('?next=%s' %(request.get_full_path))
     return  render(request,'machinelearning/login.html')
 
 def handleCommand(request):
