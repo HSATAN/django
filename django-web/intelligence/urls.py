@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+import django
 from machinelearning.views import index,service,login,command,handleCommand,topics,new_topic,topic,upload,upload1,sync_info
 from machinelearning.views import uppic,learn,addTopic,showTopic,picture
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^$',index),
     url(r'^service/',service),
     url(r'^command/',command),

@@ -120,7 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_URL='/accounts/login/'
+#LOGIN_URL='/accounts/login/'
 #MEDIA_ROOT='/home'#设置文件的保存路径
 #MEDIA_URL='/upload/'#访问该上传文件的url的前缀
 #APPEND_SLASH=False
