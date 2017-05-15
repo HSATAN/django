@@ -1,4 +1,5 @@
 #coding=utf-8
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -179,7 +180,7 @@ def service(request):
     return render(request,'machinelearning/service.html')
     pass
 def login(request):
-    #return redirect('?next=%s' %(request.get_full_path))
+    return redirect(reversed())
     return  render(request,'machinelearning/login.html')
 
 def handleCommand(request):
