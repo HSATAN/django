@@ -45,14 +45,14 @@ xmlhttp.send("item="+topic);
 <div>现有主题</div>
     <ol id="topics">
     {% for item in items %}
-        <li>{{item}}</li>
+        <li style="font-size: large">{{item}}</li>
     {% empty %}
     {% endfor %}
     </ol>
 </section>
 <button id="newtopic">添加新内容</button>
 <form id="topicform" hidden>
-    <textarea id="item" cols="100" rows="20"></textarea>
+    <textarea id="item" cols="100" rows="20" style="font-size: large"></textarea>
     <button type="button" id="additem">添加</button>
 </form>
 </body>
