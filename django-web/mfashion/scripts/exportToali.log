@@ -1,0 +1,24 @@
+[line: 56]  [time:2017-06-16 11:19]  INFO :  select *from products where brand_id=10166 and  offline!=1 and gender not in ("male","female")  and region in ("uk","us","cn","it","fr","se","jp") limit  0,500
+[line: 174]  [time:2017-06-16 11:19]  INFO :  查询出 0 条数据
+[line: 175]  [time:2017-06-16 11:19]  INFO :  成功导入 0条数据
+[line: 176]  [time:2017-06-16 11:19]  INFO :  导入失败0条数据
+[line: 56]  [time:2017-06-16 11:19]  INFO :  select *from products where brand_id=10178 and  offline!=1 and gender not in ("male","female")  and region in ("uk","us","cn","it","fr","se","jp") limit  0,500
+[line: 174]  [time:2017-06-16 11:19]  INFO :  查询出 0 条数据
+[line: 175]  [time:2017-06-16 11:19]  INFO :  成功导入 0条数据
+[line: 176]  [time:2017-06-16 11:19]  INFO :  导入失败0条数据
+[line: 56]  [time:2017-06-16 11:19]  INFO :  select *from products where brand_id=10184 and  offline!=1 and gender not in ("male","female")  and region in ("uk","us","cn","it","fr","se","jp") limit  0,500
+[line: 174]  [time:2017-06-16 11:19]  INFO :  查询出 0 条数据
+[line: 175]  [time:2017-06-16 11:19]  INFO :  成功导入 0条数据
+[line: 176]  [time:2017-06-16 11:19]  INFO :  导入失败0条数据
+[line: 56]  [time:2017-06-16 11:19]  INFO :  select *from products where brand_id=10212 and  offline!=1 and gender not in ("male","female")  and region in ("uk","us","cn","it","fr","se","jp") limit  0,500
+[line: 174]  [time:2017-06-16 11:19]  INFO :  查询出 0 条数据
+[line: 175]  [time:2017-06-16 11:19]  INFO :  成功导入 0条数据
+[line: 176]  [time:2017-06-16 11:19]  INFO :  导入失败0条数据
+[line: 56]  [time:2017-06-16 11:19]  INFO :  select *from products where brand_id=10220 and  offline!=1 and gender not in ("male","female")  and region in ("uk","us","cn","it","fr","se","jp") limit  0,500
+[l[line: 236]  [time:2017-06-16 11:19]  ERROR :  (1062, "Duplicate entry '8cccc1bdfc86dc1d1eca6b2c48b38153' for key 'PRIMARY'")
+[line: 236]  [time:2017-06-16 11:19]  ERROR :  (1062, "Duplicate entry '298df5e9cbb7ba1a4bc77371407130a4' for key 'PRIMARY'")
+[line: 236]  [time:2017-06-16 11:19]  ERROR :  (1062, "Duplicate entry 'f8cadc448cb7a5a0b43aa15039f3cc2f' for key 'PRIMARY'")
+[line: 236]  [time:2017-06-16 11:19]  ERROR :  (1062, "Duplicate entry '66b7f310844275ce3f232c459746ffae' for key 'PRIMARY'")
+[line: 236]  [time:2017-06-16 11:19]  ERROR :  (1062, "Duplicate entry '717716b75519e595a754bf7357cd667e' for key 'PRIMARY'")
+[line: 236]  [time:2017-06-16 11:19]  ERROR :  (1062, "Duplicate entry '01d5be75aec1caad29f031447d56d132' for key 'PRIMARY'")
+[line: 236]  [ti
