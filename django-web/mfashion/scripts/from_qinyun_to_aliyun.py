@@ -45,10 +45,7 @@ def get_qinyun(brand_id):
     global fail_sum
     global get_sum
     global global_result
-    if brand_id==10373:
-        get_sum=500
-    if brand_id==10226:
-        get_sum=1452
+
     try:
         count=1
         while count>0:
@@ -60,9 +57,6 @@ def get_qinyun(brand_id):
             #thread=threading.Thread(target=get_result,args=(qinyun_sql,))
             #time.sleep(300)
             count = len(results)
-            if count==0:
-                sendemail('连接超时'+str(brand_id))
-                break
             get_sum += count
             print(qinyun_sql)
             print(count)
@@ -158,12 +152,12 @@ def get_qinyun(brand_id):
                     into_ali_sql2= 'price,price_discount,price_change,fetch_time,update_time,touch_time,offline,offline_time,fingerprint)  VALUES '
                     into_ali_sql3="('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')"%(region,brand_id,model,name,category,url,color,spec,description,details,gender,price,price_discount,price_change,fetch_time,update_time,touch_time,offline,offline_time,fingerprint)
                     into_ali_sql=into_ali_sql1+into_ali_sql2+into_ali_sql3
-                    image_true=process_image(fingerprint)
-                    print(image_true)
-                    if image_true:
-                        ali_cursor.execute(into_ali_sql)
-                        conn_ali.commit()
-                        success_sum+=1
+                    #image_true=process_image(fingerprint)
+                    #print(image_true)
+                    #if image_true:
+                    ali_cursor.execute(into_ali_sql)
+                    conn_ali.commit()
+                    success_sum+=1
                     print(success_sum)
                 except Exception as e:
                     logging.error(str(e)+str(region))
@@ -240,21 +234,17 @@ def process_image(fingerprint):
 
 
 def get_update_time():
-    brand_list=[
-    10166,10178,10184,10212,10220,10226,10239,10248,10259,10263,10264,10268,10270,10300]
-    #brand_list=[
-    #10316,10322,10333,10354,10373,10385,10388,10429,10510,10669,10856,10897,10946,11301,11614,13084,13902,
-    #14022,14097,14162,14163,14997]
+    brand_list=[10135]
     global product_image_time
     for brand_id in brand_list:
         try:
-            update_time_sql='SELECT * FROM products_core.images_store where path like "'+str(brand_id)+ "%" '"and update_time>"2016-12-29 07:57:09" order by update_time asc limit 1'
-            print(brand_id)
-            print(update_time_sql)
-            product_image_time=image_store_cursor.execute(update_time_sql)
-            result=image_store_cursor.fetchone()
+            #update_time_sql='SELECT * FROM products_core.images_store where path like "'+str(brand_id)+ "%" '"and update_time>"2016-12-29 07:57:09" order by update_time asc limit 1'
+            #print(brand_id)
+            #print(update_time_sql)
+            #product_image_time=image_store_cursor.execute(update_time_sql)
+            #print(product_image_time)
+            #result=image_store_cursor.fetchone()
             get_qinyun(brand_id)
-            print(result['update_time'])
         except Exception as e:
             print(e)
 success_sum=0

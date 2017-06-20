@@ -47,17 +47,25 @@ def get_update_time():
     10142,10149,10150,10152,10166,10178,10184,10192,10212,10220,10226,10239,10248,10259,10263,10264,10268,10270,10300,
     10308,10316,10322,10333,10350,10354,10367,10369,10373,10385,10388,10429,10510,10669,10856,10897,10946,11301,11614,13084,13902,
     14022,14097,14162,14163,14997]
-    for brand in brand_list:
-        try:
-            update_time_sql='SELECT * FROM products_core.images_store where path like "'+str(brand)+ "%" '"and update_time>"2016-12-29 07:57:09" order by update_time asc limit 1'
-            print(brand)
-            print(update_time_sql)
-            update_time=image_store_cursor.execute(update_time_sql)
-            result=image_store_cursor.fetchone()
-            print(result['update_time'])
-        except Exception as e:
-            print(e)
+    with open('checkfile','w') as f:
+        for brand in brand_list:
+            try:
+                qinyun_sql = 'select count(*) as a  from products where brand_id=%s and  offline!=1 and gender not in ("male","female")  and region in ("uk","us","cn","it","fr","se","jp")' % (brand)
+
+                qingyun_cursor.execute(qinyun_sql)
+                result=qingyun_cursor.fetchone()
+                qinyun_count=result['a']
+                ali_cursor.execute(qinyun_sql)
+                ali_result=ali_cursor.fetchone()
+                ali_count=ali_result['a']
+                if (qinyun_count-ali_count)>100:
+                    print(str(brand)+'  '+str(qinyun_count)+'     '+str(ali_count)+'      '+str(qinyun_count-ali_count))
+                    f.write(str(brand)+'  '+str(qinyun_count)+'     '+str(ali_count)+'      '+str(qinyun_count-ali_count)+'\n')
+            except Exception as e:
+                print(e)
     conn_ali.close()
     conn_qinyun.close()
 get_update_time()
+
+
 
