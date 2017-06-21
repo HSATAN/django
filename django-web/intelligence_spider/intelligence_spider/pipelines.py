@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import sys
 import scrapy
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
 from matplotlib.pyplot import plot,savefig
 import numpy as np
 import datetime
@@ -35,7 +38,7 @@ class IntelligenceWeatherPipeline(object):
         plot(numpy_day,numpy_temperature,'--*b')
         path=os.getcwd()
         path=path.split('django-web')[0]
-        path=path+'django-web'+'\machinelearning\static\weatherpic'+'\\'+date_weather+'.jpg'
+        path=path+'django-web'+'/machinelearning/static/weatherpic'+'/'+date_weather+'.jpg'
         print(path)
         savefig(path)
         print('-------------')
