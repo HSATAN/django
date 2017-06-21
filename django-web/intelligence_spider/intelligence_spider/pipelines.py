@@ -1,27 +1,24 @@
 # -*- coding: utf-8 -*-
 import sys
 import scrapy
-sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
+import datetime
+#sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
 from db.connMongo import handleMongo
-from scrapy.pipelines.images import ImagesPipeline
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-class IntelligenceImagePipeline(ImagesPipeline):
-    def get_media_requests(self, item, info):
-        for image_url in item['image_urls']:
-            yield scrapy.Request(image_url)
-    def item_completed(self, results, item, info):
-        return item
-class IntelligenceSpiderPipeline(object):
+class IntelligenceWeatherPipeline(object):
     def __init__(self):
         self.client=handleMongo.get_mongo()
-        self.db=self.client['runnoob']
-        self.conn=self.db['qiubai']
-        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+        self.db=self.client['weather']
+        self.conn=self.db['beijing']
     def process_item(self, item, spider):
-        print('---------------------------------------------------------------')
-        self.conn.insert(item)
+        date_weather=str(datetime.datetime.now().strftime('%Y-%m-%d'))
+        update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        result=self.conn.update({'_id':date_weather},{'$set':{'weather':item['weather'],'update_time':update_time}},True)
+        self.client.close()
         return item
+    def close_spider(self,spider):
+        pass

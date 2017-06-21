@@ -7,10 +7,5 @@
 
 import scrapy
 
-class IntelligenceImageItem(scrapy.Item):
-    image_urls=scrapy.Field()
-    images=scrapy.Field()
-class IntelligenceSpiderItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class IntelligenceWeatherItem(scrapy.Item):
+    weather=scrapy.Field()

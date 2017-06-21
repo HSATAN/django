@@ -1,4 +1,5 @@
 #coding=utf-8
+import requests
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -155,6 +156,7 @@ def index(request):
         </xml>'''.format(FromUserName,ToUserName,CreateTime,Content)
         return HttpResponse(message)
     except:
+
         return render(request, 'machinelearning/index.html')
         pass
 #@login_required

@@ -89,16 +89,16 @@ EXTENSIONS = {
     'scrapy.extensions.spiderstate.SpiderState': 0,
     'scrapy.extensions.throttle.AutoThrottle': 0,
 }
-IMAGES_STORE ='D:\django-web\intelligence_spider\intelligence_spider\images'
-IMAGES_THUMBS = {
-    'small': (50, 50),
-    'big': (270, 270),
-}
+#IMAGES_STORE ='D:\django-web\intelligence_spider\intelligence_spider\images'
+#IMAGES_THUMBS = {
+#    'small': (50, 50),
+#    'big': (270, 270),
+#}
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     #'intelligence_spider.pipelines.IntelligenceSpiderPipeline': 300,
-    'intelligence_spider.pipelines.IntelligenceImagePipeline': 600,
+    'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

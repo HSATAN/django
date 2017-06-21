@@ -38,7 +38,7 @@ logging.basicConfig(level=logging.INFO, format='[line: %(lineno)d]  [time:%(asct
 def process_image():
     product_image_time='2016-12-29 07:57:09'
     #10049,10057,10135,10149,10152,10184,10220,10226,
-    brand_list = [10333,10350,10369,10373,14997]
+    brand_list = [14997]
     for brand_id in brand_list:
         sql_image='select * from products_image WHERE  brand_id="%s"'%(brand_id)
         ali_sql_product = 'select fingerprint from products where brand_id=%s' % brand_id
