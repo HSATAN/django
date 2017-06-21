@@ -2,7 +2,7 @@ from twisted.internet import reactor
 from scrapy.crawler import Crawler
 from scrapy import signals
 import sys
-#sys.path.append(r"D:\django\django-web\intelligence_spider")
+sys.path.append(r"D:\django\django-web\intelligence_spider")
 from intelligence_spider.spiders.weather_spider  import WeatherSpider as spider
 #from intelligence_spider.spiders.test_spider  import TestSpider as spider
 from scrapy.utils.project import get_project_settings

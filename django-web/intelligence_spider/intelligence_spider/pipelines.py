@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
 import scrapy
+from matplotlib.pyplot import plot,savefig
+import numpy as np
 import datetime
+import re,os
 #sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
 from db.connMongo import handleMongo
 # Define your item pipelines here
@@ -19,6 +22,23 @@ class IntelligenceWeatherPipeline(object):
         update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         result=self.conn.update({'_id':date_weather},{'$set':{'weather':item['weather'],'update_time':update_time}},True)
         self.client.close()
+        day=[]
+        temperature=[]
+        for data in item['weather']:
+            day.append(re.findall('[0-9]+',data)[1])
+            temperature.append(re.findall('[0-9]+',data)[3])
+
+        numpy_day=np.array(day)
+        numpy_temperature=np.array(temperature)
+        print(numpy_day)
+        print(numpy_temperature)
+        plot(numpy_day,numpy_temperature,'--*b')
+        path=os.getcwd()
+        path=path.split('django-web')[0]
+        path=path+'django-web'+'\machinelearning\static\weatherpic'+'\\'+date_weather+'.jpg'
+        print(path)
+        savefig(path)
+        print('-------------')
         return item
     def close_spider(self,spider):
         pass

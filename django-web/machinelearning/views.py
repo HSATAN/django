@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 import os
+import datetime
 from lxml import etree
 from urllib import unquote
 from machinelearning.mongodb import db
@@ -156,9 +157,25 @@ def index(request):
         </xml>'''.format(FromUserName,ToUserName,CreateTime,Content)
         return HttpResponse(message)
     except:
-
-        return render(request, 'machinelearning/index.html')
-        pass
+        try:
+            print('-----------------------')
+            content={'weather':'','ip':'','pic':''}
+            ip = request.META['REMOTE_ADDR']
+            content['ip']=ip
+            mongoclient = db.Mongo.get_mongo()
+            mongo_db=mongoclient.weather
+            table=mongo_db.beijing
+            update_time=datetime.datetime.now().strftime('%Y-%m-%d')
+            result=table.find({'_id':update_time})
+            for weather in result:
+                print(weather['weather'])
+                content['weather']=weather['weather'][2]
+            content['pic']=update_time+'.jpg'
+            return render(request, 'machinelearning/index.html',content)
+        except Exception as e:
+            print(e)
+            return render(request, 'machinelearning/index.html')
+            pass
 #@login_required
 def picture(request):
     try:
