@@ -39,9 +39,8 @@ class IntelligenceWeatherPipeline(object):
         path=os.getcwd()
         path=path.split('django-web')[0]
         path=path+'django-web'+'/machinelearning/static/weatherpic'+'/'+date_weather+'.jpg'
-        print(path)
-        savefig(path)
-        print('-------------')
+        if not os.path.exists(path):
+            savefig(path)
         return item
     def close_spider(self,spider):
         pass
