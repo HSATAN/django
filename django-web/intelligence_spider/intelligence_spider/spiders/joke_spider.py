@@ -1,8 +1,7 @@
-# -*- coding:utf-8 -*-
+#coding=utf-8
 import scrapy
 from scrapy import Request
 from scrapy import Selector
-from scrapy import log
 import sys,copy
 import os
 import json
@@ -10,24 +9,29 @@ import re
 import datetime
 import requests
 from lxml import etree
-import logging
 import time
+import logging,re,json
 #from intelligence_spider.items import IntelligenceImageItem
 
 class MySpider(scrapy.Spider):
     name = 'joke'
     allowed_domains = ['*']
     start_urls = [
-        'https://www.fendi.com/us'
+        'http://www.weather.com.cn/weather1d/101010100.shtml#search'
     ]
-    def __init__(self):
-        global proxies_set
-        self.prox_set=proxies_set
-        self.total=0
-        self.seen=set()
-        self.flag=0
-        self.handlurl=set()
     def parse(self,response):
+        print('================')
+        #print(response.body.decode('utf-8'))
         sel=Selector(response)
-        metadata=response.meta['userdata']
+        try:
+            temperature_list=sel.xpath('//div[@class="curve_livezs"]/following-sibling::script[1]/text()').extract()[0]
+            data=json.loads(re.findall('{.+}',temperature_list)[0])
+            print(str(data))
+            print(data['1d'])
+            print(len(data['1d']))
+            print(list(data['1d'])[:6])
+        except Exception as e:
+            print(e)
+
+
 

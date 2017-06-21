@@ -3,7 +3,7 @@ import sys
 import scrapy
 sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
 from db.connMongo import handleMongo
-from scrapy.contrib.pipeline.images import ImagesPipeline
+from scrapy.pipelines.images import ImagesPipeline
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
