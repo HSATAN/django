@@ -43,7 +43,7 @@ xmlhttp.send("item="+topic);
 欢迎！在这里你可以查看和添加知识主题
 <section>
 <div>现有主题</div>
-    <ol id="topics">
+    <ol id="topics" style="font-size: large">
     {% for item in items %}
         <li style="font-size: large">{{item}}</li>
     {% empty %}

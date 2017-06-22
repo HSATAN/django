@@ -1,27 +1,46 @@
 # -*- coding: utf-8 -*-
 import sys
 import scrapy
-sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
+from matplotlib.pyplot import plot,savefig
+import numpy as np
+import datetime
+import re,os
+#sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
 from db.connMongo import handleMongo
-from scrapy.contrib.pipeline.images import ImagesPipeline
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-class IntelligenceImagePipeline(ImagesPipeline):
-    def get_media_requests(self, item, info):
-        for image_url in item['image_urls']:
-            yield scrapy.Request(image_url)
-    def item_completed(self, results, item, info):
-        return item
-class IntelligenceSpiderPipeline(object):
+class IntelligenceWeatherPipeline(object):
     def __init__(self):
         self.client=handleMongo.get_mongo()
-        self.db=self.client['runnoob']
-        self.conn=self.db['qiubai']
-        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+        self.db=self.client['weather']
+        self.conn=self.db['beijing']
     def process_item(self, item, spider):
-        print('---------------------------------------------------------------')
-        self.conn.insert(item)
+        date_weather=str(datetime.datetime.now().strftime('%Y-%m-%d'))
+        update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        result=self.conn.update({'_id':date_weather},{'$set':{'weather':item['weather'],'update_time':update_time}},True)
+        self.client.close()
+        day=[]
+        temperature=[]
+        for data in item['weather']:
+            day.append(re.findall('[0-9]+',data)[1])
+            temperature.append(re.findall('[0-9]+',data)[3])
+
+        numpy_day=np.array(day)
+        numpy_temperature=np.array(temperature)
+        print(numpy_day)
+        print(numpy_temperature)
+        plot(numpy_day,numpy_temperature,'--*b')
+        path=os.getcwd()
+        path=path.split('django-web')[0]
+        path=path+'django-web'+'/machinelearning/static/weatherpic'+'/'+date_weather+'.jpg'
+        if not os.path.exists(path):
+            savefig(path)
         return item
+    def close_spider(self,spider):
+        pass
