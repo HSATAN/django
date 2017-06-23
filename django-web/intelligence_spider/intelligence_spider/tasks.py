@@ -1,7 +1,9 @@
 from celery import Celery
-
-app=Celery('wether')
+import subprocess
+app=Celery()
 app.config_from_object('config')
 @app.task()
-def hello(name):
-    return 'hello '+name
+def spider(name):
+    crawl = subprocess.Popen("scrapy crawl %s" % spider, stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
+    crawl.communicate()
+    return 'run  '+name
