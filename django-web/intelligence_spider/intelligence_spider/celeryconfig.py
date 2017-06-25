@@ -5,7 +5,11 @@ from kombu import Exchange,Queue
 #CELERY_RESULT_BACKEND='redis://47.93.24.159:6379/1'
 BROKER_URL='redis://47.93.24.159:6379/1'
 CELERY_RESULT_BACKEND='db+mysql://root@127.0.0.1/celery'
+
+'''
+
 CELERY_TASK_RESULT_EXPIRES = 20 * 60  #20 minutes
+
 CELERY_DEFAULT_QUEUE = 'default'
 CELERY_DEFAULT_EXCHANGE_TYPE = 'direct'
 CELERY_DEFAULT_ROUTING_KEY = 'default'
@@ -37,9 +41,18 @@ class MyRouter(object):
 
 CELERY_ROUTES = (MyRouter(), )
 
-'''
+
+
+#使用mysql做结果数据库,
+CELERY_RESULT_BACKEND='db+mysql://root@127.0.0.1/celery'#最后celery为数据库的名字
+CELERY_RESULT_DB_TABLENAMES = {#设置数据库表
+    'task': 'taskmeta',
+    'group': 'groupmeta',
+}
+
+#设置mongodb做结果数据库
 CELERY_RESULT_BACKEND='mongodb'
-CELERY_RESULT_BACKEND_SETTINGS={
+CELERY_RESULT_BACKEND_SETTINGS={#设置数据库连接配置
     'host':'47.93.5.189',
     'port':27017,
     'database':'spidertask',
@@ -49,13 +62,13 @@ CELERY_RESULT_BACKEND_SETTINGS={
 CELERYBEAT_SCHEDULE={
     'every-5-min':{
         'task':'tasks.spider',
-        'schedule':timedelta(seconds=60),
+        'schedule':timedelta(seconds=3600),
         'args':None
 
     },
     'every-1-min':{
         'task':'tasks.joke_spider',
-        'schedule':timedelta(seconds=50),
+        'schedule':timedelta(seconds=3600),
         'args':None
     }
 }
