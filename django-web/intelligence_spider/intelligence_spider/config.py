@@ -27,28 +27,3 @@ CELERYBEAT_SCHEDULE={
         'args':None
     }
 }
-
-
-CELERY_DEFAULT_QUEUE="default"
-CELERY_DEFAULT_EXCHANGE_TYPE='direct'
-CELERY_DEFAULT_ROUTING_KEY='default'
-
-default_exchange=Exchange('default',type='direct')
-
-CELERY_QUEUES=(
-    Queue('default',default_exchange,routing_key='default'),
-    Queue('weather',default_exchange,routing_key='weather'),
-    Queue('joke',default_exchange,routing_key='joke')
-)
-
-class MyRouter(object):
-    def route_for_task(self,task,args=None,kwargs=None):
-        if task=='tasks.spider':
-            return {
-                'routing_key':'weather'
-            }
-        elif  task=='tasks.joke_spider':
-            return {
-                'routing_key':'joke'
-            }
-        else:return None
