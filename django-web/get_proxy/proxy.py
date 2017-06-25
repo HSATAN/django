@@ -1,3 +1,4 @@
+from scrapy.selector import Selector
 import sys
 import os
 import json
@@ -37,5 +38,22 @@ def get_proxies():
         # for line in r.text.split("\n"):
         #     proxies_set.add(line.strip())
     open(proxies_set_file, "w").write(str(proxies_set))
-    return proxies_set.pop()
+    #return proxies_set.pop()
 print(get_proxies())
+print(proxies_set)
+def get_html(prox=None):
+    url='http://47.93.5.189:8000/picture/'
+    print(prox)
+    try:
+        text=requests.get(url,proxies={'http':prox},timeout=5).text
+        sel=Selector(text=text)
+        title=sel.xpath('//title/text()').extract()[0]
+        print(title)
+        ip=sel.xpath('//title/following::div[1]/text()').extract()
+        print(ip)
+    except Exception as e:print(e)
+
+for prox in proxies_set:
+    get_html(prox)
+
+#get_html()

@@ -7,3 +7,9 @@ def spider():
     crawl = subprocess.Popen("scrapy crawl weather", stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
     crawl.communicate()
     return 'run  '+'wether'
+
+@app.task()
+def joke_spider():
+    crawl=subprocess.Popen("scrapy crawl joke",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
+    crawl.communicate()
+    return 'run joke'

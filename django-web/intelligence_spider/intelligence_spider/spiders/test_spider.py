@@ -14,11 +14,10 @@ import logging,re,json
 #from intelligence_spider.items import IntelligenceImageItem
 
 class TestSpider(scrapy.Spider):
-    name = 'test'
+    name = 'joke'
     allowed_domains = ['*']
     start_urls = [
         'https://www.fendi.com/us/monster-cube-charm-charm-in-red-and-black-fur/p-7AR3866OQF05IP'
     ]
     def parse(self,response):
         print('================')
-        print(response.body.decode('utf-8'))
