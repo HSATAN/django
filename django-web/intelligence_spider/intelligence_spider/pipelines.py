@@ -8,7 +8,7 @@ from matplotlib.pyplot import plot,savefig
 import numpy as np
 import datetime
 import re,os
-#sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
+sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
 from db.connMongo import handleMongo
 # Define your item pipelines here
 #

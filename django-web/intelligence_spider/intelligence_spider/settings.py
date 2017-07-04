@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'intelligence_spider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'intelligence_spider (+http://www.yourdomain.com)'#如果代理为默认则可能被禁止
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0'#如果代理为默认则可能被禁止
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -57,38 +57,11 @@ SPIDER_MIDDLEWARES = {
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-#    'intelligence_spider.middlewares.MyCustomDownloaderMiddleware': 543,
-'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware': 100,
-    'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware': 300,
-    'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware': 350,
-    'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware': 400,
-    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 500,
-    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 550,
-    'scrapy.downloadermiddlewares.ajaxcrawl.AjaxCrawlMiddleware': 560,
-    'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware': 580,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 590,
-    'scrapy.downloadermiddlewares.redirect.RedirectMiddleware': 600,
-    'scrapy.downloadermiddlewares.cookies.CookiesMiddleware': 700,
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 750,
-    'scrapy.downloadermiddlewares.stats.DownloaderStats': 850,
-    'scrapy.downloadermiddlewares.httpcache.HttpCacheMiddleware': 900,
-}
+
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
-EXTENSIONS = {
-#    'scrapy.extensions.telnet.TelnetConsole': None,
-    'scrapy.extensions.corestats.CoreStats': 0,
-    'scrapy.extensions.telnet.TelnetConsole': 0,
-    'scrapy.extensions.memusage.MemoryUsage': 0,
-    'scrapy.extensions.memdebug.MemoryDebugger': 0,
-    'scrapy.extensions.closespider.CloseSpider': 0,
-    'scrapy.extensions.feedexport.FeedExporter': 0,
-    'scrapy.extensions.logstats.LogStats': 0,
-    'scrapy.extensions.spiderstate.SpiderState': 0,
-    'scrapy.extensions.throttle.AutoThrottle': 0,
-}
+
 #IMAGES_STORE ='D:\django-web\intelligence_spider\intelligence_spider\images'
 #IMAGES_THUMBS = {
 #    'small': (50, 50),
@@ -98,7 +71,7 @@ EXTENSIONS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     #'intelligence_spider.pipelines.IntelligenceSpiderPipeline': 300,
-    'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
+    #'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
