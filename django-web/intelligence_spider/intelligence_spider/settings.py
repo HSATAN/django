@@ -71,7 +71,7 @@ SPIDER_MIDDLEWARES = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     #'intelligence_spider.pipelines.IntelligenceSpiderPipeline': 300,
-    #'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
+    'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
