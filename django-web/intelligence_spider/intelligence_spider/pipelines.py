@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
+import time
 import scrapy
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
@@ -8,8 +9,10 @@ from matplotlib.pyplot import plot,savefig
 import numpy as np
 import datetime
 import re,os
-sys.path.append('D:\django-web\intelligence_spider\intelligence_spider')
-from db.connMongo import handleMongo
+from scrapy.pipelines.files import FilesPipeline
+from scrapy.pipelines.images import ImagesPipeline
+#sys.path.append(r"D:django-git\django\django-web\intelligence_spider")
+from intelligence_spider.db.connMongo import handleMongo
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
@@ -44,3 +47,20 @@ class IntelligenceWeatherPipeline(object):
         return item
     def close_spider(self,spider):
         pass
+
+class MyImagePipeline(ImagesPipeline):
+    def get_media_requests(self, item, info):
+        for image_url in item['images_url']:
+            yield scrapy.Request(image_url)
+    def item_completed(self, results, item, info):
+        for end in results:
+            end[1]['path']=end[1]['path'].split('/')[0]+'/'+str(time.time())
+            print(end)
+        return item
+
+class MyFilePipeline(FilesPipeline):
+    def get_media_requests(self, item, info):
+        for image_url in item['files_url']:
+            yield scrapy.Request(image_url)
+    def item_completed(self, results, item, info):
+        return item

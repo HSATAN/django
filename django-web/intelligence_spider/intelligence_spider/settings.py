@@ -62,15 +62,18 @@ SPIDER_MIDDLEWARES = {
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
 
-#IMAGES_STORE ='D:\django-web\intelligence_spider\intelligence_spider\images'
-#IMAGES_THUMBS = {
-#    'small': (50, 50),
-#    'big': (270, 270),
-#}
+IMAGES_STORE =r'D:\elligence_spider\images'
+FILES_STORE =r'D:\scrapyFilePipeline'
+IMAGES_THUMBS = {
+    'small': (50, 50),
+    'big': (270, 270),
+}
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    #'intelligence_spider.pipelines.IntelligenceSpiderPipeline': 300,
+    #'scrapy.pipelines.images.ImagesPipeline': 1,
+    #'intelligence_spider.pipelines.MyImagePipeline': 300,
+    'intelligence_spider.pipelines.MyFilePipeline':301
     #'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
 }
 

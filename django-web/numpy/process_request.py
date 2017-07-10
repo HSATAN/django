@@ -5,7 +5,7 @@ from PIL import Image
 from scrapy.selector import Selector
 import re,json
 url = 'http://www.panerai.cn/zh-cn/collections/special-editions/2017/luminor-marina-oracle-team-usa-8-days-acciaio--448_pam00724.html'
-url='http://www.alexandermcqueen.cn/cn/alexandermcqueen/%E8%BF%B7%E4%BD%A0%E8%A3%99_cod34688338sm.html#dept=wsssl_glr'
+url='http://weibo.com/gzdaily'
 response=requests.get(url=url)
 print(response.text)
 sel=Selector(response)
