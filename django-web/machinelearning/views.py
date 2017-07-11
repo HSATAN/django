@@ -21,6 +21,9 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 # Create your views here.
+def download(request):
+    data=b'huangkaijie'
+    return  HttpResponse(data,mimetype='application/octet-stream')
 def uppic(request):
     if request.method == 'POST':
         form = PictureForm(request.POST, request.FILES)
