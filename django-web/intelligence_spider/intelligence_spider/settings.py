@@ -46,9 +46,12 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+DOWNLOADER_MIDDLEWARES = {
+    'intelligence_spider.middlewares.ProxyMiddleware': 900,
+}
+
 SPIDER_MIDDLEWARES = {
-#    'intelligence_spider.middlewares.IntelligenceSpiderSpiderMiddleware': 543,
-'scrapy.spidermiddlewares.httperror.HttpErrorMiddleware': 50,
+    'scrapy.spidermiddlewares.httperror.HttpErrorMiddleware': 50,
     'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': 500,
     'scrapy.spidermiddlewares.referer.RefererMiddleware': 700,
     'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware': 800,

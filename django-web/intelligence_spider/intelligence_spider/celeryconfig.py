@@ -3,7 +3,7 @@ from datetime import timedelta
 from celery.schedules import crontab
 from kombu import Exchange,Queue
 #CELERY_RESULT_BACKEND='redis://47.93.24.159:6379/1'
-BROKER_URL='redis://47.93.24.159:6379/1'
+BROKER_URL='redis://:redis@47.93.24.159:6379/1'
 CELERY_RESULT_BACKEND='db+mysql://root@127.0.0.1/celery'
 
 '''
@@ -62,13 +62,13 @@ CELERY_RESULT_BACKEND_SETTINGS={#设置数据库连接配置
 CELERYBEAT_SCHEDULE={
     'every-5-min':{
         'task':'tasks.spider',
-        'schedule':timedelta(seconds=3600),
+        'schedule':timedelta(seconds=60),
         'args':None
 
     },
     'every-1-min':{
         'task':'tasks.joke_spider',
-        'schedule':timedelta(seconds=3600),
+        'schedule':timedelta(seconds=60),
         'args':None
     }
 }
