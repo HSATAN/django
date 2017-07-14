@@ -2,7 +2,7 @@
 from scrapy_redis.spiders import RedisSpider
 
 class MyRSpider(RedisSpider):
-    name = 'redis_spider'
+    name = 'myspider'
     def parse(self, response):
         print(response.text)
         pass
