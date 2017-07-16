@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from machinelearning.views import index,service,login,command,handleCommand,topics,new_topic,topic,upload,upload1,sync_info
-from machinelearning.views import uppic,learn,addTopic,showTopic,picture
+from machinelearning.views import uppic,learn,addTopic,showTopic,picture,download
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',index),
@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^learn/$',learn),
     url(r'^addtopic/$',addTopic),
     url(r'^topic/',showTopic),
-    url(r'^picture/$',picture)
+    url(r'^picture/$',picture),
+    url(r'^download',download)
 ]
