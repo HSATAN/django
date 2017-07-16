@@ -76,8 +76,8 @@ IMAGES_THUMBS = {
 ITEM_PIPELINES = {
     #'scrapy.pipelines.images.ImagesPipeline': 1,
     #'intelligence_spider.pipelines.MyImagePipeline': 300,
-    'intelligence_spider.pipelines.MyFilePipeline':301
-    #'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
+    #'intelligence_spider.pipelines.MyFilePipeline':301
+    'intelligence_spider.pipelines.IntelligenceWeatherPipeline': 600,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
