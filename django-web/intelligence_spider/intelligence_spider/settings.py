@@ -47,7 +47,7 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'intelligence_spider.middlewares.ProxyMiddleware': 900,
+    #'intelligence_spider.middlewares.ProxyMiddleware': 900,
 }
 
 SPIDER_MIDDLEWARES = {

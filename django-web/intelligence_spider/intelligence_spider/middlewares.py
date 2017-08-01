@@ -9,11 +9,11 @@ count=1
 class ProxyMiddleware(object):
     # overwrite process request
     def process_request(self, request, spider):
-        print('--------------------')
+        #print('--------------------')
         global count
         count+=1
         #print(request.body)
     def process_response(self,request,response,spider):
-        print('[=================================')
+        #print('[=================================')
         print(response.headers)
         return response

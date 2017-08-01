@@ -6,7 +6,7 @@ def log(func):
         print(type(a))
         print(type(kwargs))
         print(kwargs)
-        print(kwargs['n'])
+        print(kwargs['a'])
         return  func()
     return wrapper
 
